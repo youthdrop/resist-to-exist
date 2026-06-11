@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pizza & Shirt Prepay | Resist to Exist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="order-page">
+    <section class="full-story">
+      <p class="story-label">Community Fundraiser</p>
+      <h1>Prepay for Pizza & Campaign Shirts</h1>
+
+      <form id="orderForm">
+        <label>Name</label>
+        <input type="text" name="name" required />
+
+        <label>Telephone Number</label>
+        <input type="tel" name="phone" required />
+
+        <label>Number of Pizzas</label>
+        <input type="number" id="pizzaQty" name="pizzaQty" min="0" max="10" value="0" />
+
+        <label>Pizza Toppings</label>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" name="toppings" value="Halal Pepperoni"> Halal Pepperoni</label>
+          <label><input type="checkbox" name="toppings" value="Halal Beef Bacon"> Halal Beef Bacon</label>
+          <label><input type="checkbox" name="toppings" value="Basil"> Basil</label>
+          <label><input type="checkbox" name="toppings" value="Onions"> Onions</label>
+          <label><input type="checkbox" name="toppings" value="Spinach"> Spinach</label>
+          <label><input type="checkbox" name="toppings" value="Green Peppers"> Green Peppers</label>
+          <label><input type="checkbox" name="toppings" value="Pepperchinis"> Pepperchinis</label>
+          <label><input type="checkbox" name="toppings" value="Pineapple"> Pineapple</label>
+        </div>
+
+        <label>Campaign Shirt Size</label>
+        <select id="shirtSize" name="shirtSize">
+          <option value="">No shirt</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="2XL">2XL</option>
+          <option value="3XL">3XL</option>
+        </select>
+
+        <div class="total-box">
+          Total: $<span id="total">0</span>
+        </div>
+
+        <button class="btn primary full" type="submit">
+          Submit Order & Pay
+        </button>
+      </form>
+    </section>
+  </main>
+
+  <script src="order.js"></script>
+</body>
+</html>
