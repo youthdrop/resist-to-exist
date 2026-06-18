@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pizza & Shirt Prepay | Resist to Exist</title>
+  <title>BBQ Plate & Shirt Prepay | Resist to Exist</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <main class="order-page">
     <section class="full-story">
       <p class="story-label">Community Fundraiser</p>
-      <h1>Prepay for Pizza & Campaign Shirts</h1>
+      <h1>Prepay for BBQ Plates & Campaign Shirts</h1>
 
       <form id="orderForm">
         <label>Name</label>
@@ -18,20 +18,12 @@
         <label>Telephone Number</label>
         <input type="tel" name="phone" required />
 
-        <label>Number of Pizzas</label>
-        <input type="number" id="pizzaQty" name="pizzaQty" min="0" max="10" value="0" />
+        <label>Number of BBQ Plates</label>
+        <input type="number" id="bbqQty" name="bbqQty" min="0" max="50" value="0" />
 
-        <label>Pizza Toppings</label>
-        <div class="checkbox-grid">
-          <label><input type="checkbox" name="toppings" value="Halal Pepperoni"> Halal Pepperoni</label>
-          <label><input type="checkbox" name="toppings" value="Halal Beef Bacon"> Halal Beef Bacon</label>
-          <label><input type="checkbox" name="toppings" value="Basil"> Basil</label>
-          <label><input type="checkbox" name="toppings" value="Onions"> Onions</label>
-          <label><input type="checkbox" name="toppings" value="Spinach"> Spinach</label>
-          <label><input type="checkbox" name="toppings" value="Green Peppers"> Green Peppers</label>
-          <label><input type="checkbox" name="toppings" value="Pepperchinis"> Pepperchinis</label>
-          <label><input type="checkbox" name="toppings" value="Pineapple"> Pineapple</label>
-        </div>
+        <p class="order-note">
+          BBQ Plate - $20 each. 
+        </p>
 
         <label>Campaign Shirt Size</label>
         <select id="shirtSize" name="shirtSize">
@@ -43,6 +35,10 @@
           <option value="2XL">2XL</option>
           <option value="3XL">3XL</option>
         </select>
+
+        <p class="order-note">
+          Campaign Shirt - $25 each.
+        </p>
 
         <div class="total-box">
           Total: $<span id="total">0</span>
