@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BBQ Plate & Shirt Prepay | Resist to Exist</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -10,23 +11,36 @@
     <section class="full-story">
       <p class="story-label">Community Fundraiser</p>
       <h1>Prepay for BBQ Plates & Campaign Shirts</h1>
+      <p class="order-note">
+        BBQ plates are $20 each. Campaign shirts are $25 each. Submit your order below and you will receive payment instructions.
+      </p>
 
-      <form id="orderForm">
-        <label>Name</label>
-        <input type="text" name="name" required />
+      <!--
+        IMPORTANT:
+        Replace YOUR-EMAIL-HERE with the email address where you want orders sent.
+        Example: action="https://formsubmit.co/you@example.com"
+        FormSubmit will send a confirmation email the first time. Click that confirmation once.
+      -->
+      <form id="orderForm" action="https://formsubmit.co/YOUR-EMAIL-HERE" method="POST">
+        <input type="hidden" name="_subject" value="New Resist to Exist BBQ/Shirt Order" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" id="totalInput" name="total" value="0" />
+        <input type="hidden" id="orderSummary" name="order_summary" value="" />
 
-        <label>Telephone Number</label>
-        <input type="tel" name="phone" required />
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" required />
 
-        <label>Number of BBQ Plates</label>
-        <input type="number" id="bbqQty" name="bbqQty" min="0" max="50" value="0" />
+        <label for="phone">Telephone Number</label>
+        <input id="phone" type="tel" name="phone" required />
 
-        <p class="order-note">
-          BBQ Plate - $20 each. 
-        </p>
+        <label for="bbqQty">Number of BBQ Plates</label>
+        <input type="number" id="bbqQty" name="bbq_plates" min="0" max="50" value="0" required />
 
-        <label>Campaign Shirt Size</label>
-        <select id="shirtSize" name="shirtSize">
+        <p class="order-note">BBQ Plate - $20 each.</p>
+
+        <label for="shirtSize">Campaign Shirt Size</label>
+        <select id="shirtSize" name="shirt_size">
           <option value="">No shirt</option>
           <option value="S">S</option>
           <option value="M">M</option>
@@ -36,17 +50,11 @@
           <option value="3XL">3XL</option>
         </select>
 
-        <p class="order-note">
-          Campaign Shirt - $25 each.
-        </p>
+        <p class="order-note">Campaign Shirt - $25 each.</p>
 
-        <div class="total-box">
-          Total: $<span id="total">0</span>
-        </div>
+        <div class="total-box">Total: $<span id="total">0</span></div>
 
-        <button class="btn primary full" type="submit">
-          Submit Order & Pay
-        </button>
+        <button class="btn primary full" type="submit">Submit Order</button>
       </form>
     </section>
   </main>
