@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PC 148 Data Dashboard | Resist to Exist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="data-dashboard-body">
+  <div class="grain"></div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html#top" aria-label="Resist to Exist home">
+      <img src="assets/resist-logo.png" alt="Resist to Exist logo" />
+    </a>
+    <nav>
+      <a href="index.html#why">Why This Matters</a>
+      <a href="index.html#stories">Stories</a>
+      <a href="data.html">Data</a>
+      <a href="https://goodbricks.org/cause/potcsd.org/general-donations" target="_blank" rel="noopener">Donate</a>
+      <a href="index.html#action">Take Action</a>
+    </nav>
+  </header>
+
+  <main class="data-dashboard-main">
+    <section class="data-dashboard-hero">
+      <div class="dashboard-meta" aria-label="Dashboard filters and source notes">
+        <span><strong>Date Range:</strong> Jan. 1, 2024 – Oct. 31, 2025</span>
+        <span><strong>Charge Type:</strong> Standalone PC 148</span>
+        <span><strong>Jurisdiction:</strong> San Diego City Attorney</span>
+        <span><strong>Baseline:</strong> White residents = 1x</span>
+      </div>
+    </section>
+
+    <section class="data-dashboard-container" aria-label="PC 148 dashboard">
+      <div class="dashboard-panel">
+        <div class="dashboard-panel-header">
+          <div>
+            <p class="eyebrow red">Resist to Exist Dashboard</p>
+            <h2>PC 148 Charging and Declination Patterns</h2>
+            <p>
+              Public records show that most standalone PC 148 cases did not move forward,
+              while Black and Hispanic residents carried a disproportionate share of the harm.
+            </p>
+          </div>
+          <button class="btn ghost dashboard-print-btn" onclick="window.print()">Export / Print</button>
+        </div>
+
+        <div class="dashboard-kpi-grid">
+          <article class="dashboard-kpi-card">
+            <span>Standalone PC 148 Cases</span>
+            <strong>1,378</strong>
+            <p>Cases where PC 148 was the only charge.</p>
+          </article>
+          <article class="dashboard-kpi-card">
+            <span>Declined to Prosecute</span>
+            <strong>970</strong>
+            <p>Cases rejected by the City Attorney.</p>
+          </article>
+          <article class="dashboard-kpi-card">
+            <span>Decline Rate</span>
+            <strong>70.4%</strong>
+            <p>970 rejected ÷ 1,378 total cases.</p>
+          </article>
+          <article class="dashboard-kpi-card">
+            <span>Charges Filed</span>
+            <strong>335</strong>
+            <p>Cases issued by the City Attorney.</p>
+          </article>
+        </div>
+
+        <div class="dashboard-viz-grid">
+          <article class="dashboard-viz-card wide">
+            <div class="dashboard-viz-head">
+              <h3>City Attorney Outcomes</h3>
+              <p>More than seven out of every ten standalone PC 148 cases were declined.</p>
+            </div>
+            <div class="dashboard-bar-chart" id="outcomeChart"></div>
+          </article>
+
+          <article class="dashboard-viz-card">
+            <div class="dashboard-viz-head">
+              <h3>Charges by Race</h3>
+              <p>Raw counts from the City Attorney data file.</p>
+            </div>
+            <div class="dashboard-bar-chart" id="raceChart"></div>
+          </article>
+
+          <article class="dashboard-viz-card">
+            <div class="dashboard-viz-head">
+              <h3>Disparity Spotlight</h3>
+              <p>White residents are used as the comparison baseline.</p>
+            </div>
+            <div class="dashboard-spotlight-grid">
+              <div class="dashboard-spotlight-card">
+                <span>Black residents</span>
+                <strong>9×</strong>
+                <p>more likely than White residents to face standalone PC 148 charging.</p>
+              </div>
+              <div class="dashboard-spotlight-card">
+                <span>Hispanic residents</span>
+                <strong>1.25×</strong>
+                <p>the White raw charge count in this file: 484 Hispanic charges ÷ 388 White charges.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-insight-grid">
+          <article class="dashboard-insight-card">
+            <h3>Key Findings</h3>
+            <ul>
+              <li><strong>1,378</strong> standalone PC 148 cases were identified.</li>
+              <li><strong>970</strong> cases were declined by prosecutors.</li>
+              <li><strong>70.4%</strong> of cases did not move forward.</li>
+              <li>Hispanic residents had the highest raw charge count.</li>
+              <li>Black residents were reported as <strong>9× more likely</strong> than White residents to be charged.</li>
+            </ul>
+          </article>
+
+          <article class="dashboard-insight-card">
+            <h3>Methodology</h3>
+            <p>
+              Data were obtained through public records requests and analyzed using Python and Pandas.
+              This dashboard separates raw counts from population-adjusted disparity findings.
+            </p>
+            <p class="dashboard-small-note">
+              Current fields reviewed include race, booking charge, issuing status, and final disposition.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <img src="assets/resist-logo.png" alt="Resist to Exist logo" />
+    <p>Resist to Exist Campaign · Standalone PC 148 Accountability</p>
+  </footer>
+
+  <script>
+    const raceData = {
+      "Hispanic": 484,
+      "Black": 430,
+      "White": 388,
+      "Other combined": 76
+    };
+
+    const outcomeData = {
+      "Rejected / Declined": 970,
+      "Issued": 335,
+      "Under Review": 56,
+      "Redirected": 17
+    };
+
+    function makeBars(targetId, data) {
+      const target = document.getElementById(targetId);
+      const max = Math.max(...Object.values(data));
+      target.innerHTML = Object.entries(data).map(([label, value]) => `
+        <div class="dashboard-bar-row">
+          <span class="dashboard-bar-label">${label}</span>
+          <div class="dashboard-bar-track" title="${label}: ${value.toLocaleString()}">
+            <div class="dashboard-bar-fill" style="width:${(value / max) * 100}%"></div>
+          </div>
+          <span class="dashboard-bar-value">${value.toLocaleString()}</span>
+        </div>
+      `).join('');
+    }
+
+    makeBars("raceChart", raceData);
+    makeBars("outcomeChart", outcomeData);
+
+    document.querySelectorAll(".dashboard-filter-row button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".dashboard-filter-row button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const selected = btn.dataset.filter;
+        const filtered = selected === "all" ? raceData : { [selected]: raceData[selected] };
+        makeBars("raceChart", filtered);
+      });
+    });
+  </script>
+</body>
+</html>
